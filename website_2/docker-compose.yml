@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  website_2:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./html:/usr/share/nginx/html
+    networks:
+      - reverse-proxy_public-network
+
+networks:
+  reverse-proxy_public-network:
+    external: true

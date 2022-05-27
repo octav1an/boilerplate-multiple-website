@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  website_1:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./html:/usr/share/nginx/html
+    networks:
+      - reverse-proxy_public-network
+
+networks:
+  # Make sure name is matching the reverse proxy compose
+  # Normally a preffix with service name is added e.g 'reverse-proxy'
+  reverse-proxy_public-network:
+    external: true
